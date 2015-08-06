@@ -1,0 +1,5 @@
+<h4 style="color:#336699;text-align:center"><b>ADD A NEW WISHE </b></h4>
+<hr>
+
+<%= render 'form' %>
+

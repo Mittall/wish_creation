@@ -1,0 +1,17 @@
+<html>
+
+	<% events.each do |event| %>
+	
+		<% @td =  event.filter_today %>
+
+		<% @cur = event.filter_current %>
+
+	<% end %>
+
+	
+	<%= @td %>
+
+	<%= @cur %>
+
+
+</html>

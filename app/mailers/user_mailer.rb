@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   #default from: ProjectApp::DEFAULT_MAIL_FROM
-  default :from => "noreply@projectapp.com"
+  default :from => "mittal.vitrainee@gmail.com"
 
   # new user registration 
   def registration_confirmation(email, opts)

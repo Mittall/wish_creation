@@ -1,0 +1,44 @@
+<%= form_for(@event_product) do |f| %>
+  <% if @event_product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event_product.errors.count, "error") %> prohibited this event_product from being saved:</h2>
+
+      <ul>
+      <% @event_product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+ <div class="field">
+    <!--<%= f.label :event_id %><br>!-->
+    <!--<%= f.number_field :event_id %>!-->
+   
+    <!--<%= select("event_product","event_id",Event.find(:all).collect {|c| [c.event_name,c.id] } ) %></p>!-->
+  </div>
+
+
+  <div class="field">
+    <%= f.label :product_id %><br>
+    <!--<%= f.number_field :product_id %>!-->
+    <%= select("event_product","product_id",Product.find(:all).collect {|c| [c.product_name,c.id] }, {:include_blank => '-Select-'}) %></p>
+  </div>
+
+<div class="control-group">
+      <%= f.label :price_to_gain, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :price_to_gain, :required => true, :class => 'input-xlarge' %>
+					<% if @event_product.errors[:price_to_gain].any? %>
+        	<span class="text-error text-message">Email <%=@event_product.errors[:price_to_gain].first %></span>
+      	<% end %>
+      </div>
+    </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

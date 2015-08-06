@@ -3,8 +3,16 @@ source 'http://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-linkedin'
+gem 'omniauth-openid'
+gem 'omniauth-podio'
+gem 'devise'
+
 #ruby
-ruby "2.0.0"
+ruby "2.1.3"
 
 # Use Postgresql as the database for Active Record
 gem 'pg', group: :production
@@ -15,8 +23,13 @@ gem 'sqlite3', group: :test
 # Use mysql2 as the database for Active Record
 gem 'mysql2', group: :development
 
+#displays speed badge for every html page [display the query execution time.]
+gem 'rack-mini-profiler'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+
+gem 'cucumber_scaffold'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -59,7 +72,9 @@ gem "will_paginate"
 
 #image upload
 gem "carrierwave"
+
 gem "rmagick"
+
 gem "mini_magick"
 
 #random key generate
@@ -70,6 +85,11 @@ gem 'bootstrap-datetimepicker-rails'
 
 #textarea editor
 gem "bootstrap-wysihtml5-rails"
+
+# Adding date/time validation
+#gem 'validates_timeliness'
+
+gem 'validates_timeliness', '~> 3.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

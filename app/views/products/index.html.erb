@@ -1,0 +1,58 @@
+<h4 style="color:#336699;text-align:center">PRODUCTS </h4>
+<hr>
+
+<table>
+ <!-- <thead>
+    <tr>
+      <th>Category</th>
+      <th></th>
+      <th>Product name</th>
+      <th>Description</th>
+
+      <th>Image one</th>
+      <th>Price</th> 
+
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+!-->
+
+  <tbody>
+	<!-- <td><h4><b style="color:blue;text-align:left"> Category </b></h4></td> 
+       <td> </td>
+        <td><h4><b style="color:blue;text-align:left"> Product Name</b></h4></td> !-->
+	
+
+    <% @products.each do |product| %>
+      <tr>
+       <!--  <td> <b style="color:green;text-align:left"><%= (product.get_category_name(product.category_id)) %> </b></td> !-->
+	<td></td>
+        <td> <h4 style="color:green;text-align:left"><%=link_to(product.product_name,product) %></h4></td>
+
+		<!--<% product.event_products.each do |event_product| %>
+		<tr>	
+		   <td> 	<%= link_to (event_product.get_event_name(event_product.event_id)), event_product %></td>
+		   <td><%= link_to (event_product.get_product_name(event_product.product_id)), event_product %></td>
+	   
+		</tr>
+    		<% end %>!-->
+
+	<td> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= image_tag product.image_one_url(:logo) , :size => "50x50" %></td>
+
+        <!--<td><%= product.description %></td>
+        <td><%= product.image_one %></td>
+        <td><%= product.price %></td>-->
+        <!--<td><%= link_to 'Show', product %></td>-->
+        <!--<td><%= link_to 'Edit', edit_product_path(product) %></td>-->
+        <!--<td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= will_paginate @products, :previous_label => 'Previous', :next_label => 'Next' %>
+<!-- <%= link_to 'New Product', new_product_path %> !-->
+</div>

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<h3> Wish Description</h3>
+<!--
+<p>
+  <strong>User:</strong>
+  <%= @event.user_id %>
+</p>
+!-->
+
+
+<p>
+  <strong>Wish name:</strong>
+  <%= @event.event_name %>
+</p>
+
+<p>
+  <strong>Wish description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @event.status %>
+</p>
+
+<p>
+  <strong>Start Date:</strong>
+  <%= @event.start_date.strftime("%d-%m-%Y") %>
+</p>
+
+<p>
+  <strong>End Date:</strong>
+  <%= @event.end_date.strftime("%d-%m-%Y") %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
+
+<hr>
+<!--<div id= "event_product_form">-->
+<h3>Wish Items</h3>
+
+<div id="event_products">
+	<%= render "event_products/event_product" %>
+</div>
+
+
+<!--</div>  div id = "event_product_form" -->
+</div>

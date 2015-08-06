@@ -35,5 +35,28 @@ module ApplicationHelper
   def get_user_roles
     Role.all.collect {|r| [r.role_type, r.id]} 
   end      
-    
+   
+def paypal_url(return_url ,carts) 
+		values = { 
+		:business => 'mittal.vitrainee@gmail.com',
+   		:cmd => '_cart',
+		:upload => 1,
+		:return => return_url,
+		}	
+	
+	total_qty = 0 
+
+			carts.each_with_index do |item, index|   
+				total = item.product.price.to_i   
+				values.merge!({
+		       "amount_#{index+1}" => total,
+		       "item_name_#{index+1}" => item.get_product_name(item.product.id),
+		       "item_number_#{index+1}" => item.id,
+		       "quantity_#{index+1}" => item.qty
+	     })   
+			end
+	 	
+   	      # For test transactions use this URL
+		"https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+	end 	
 end

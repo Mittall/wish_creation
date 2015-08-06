@@ -1,0 +1,89 @@
+<html>
+<h4 style="color:#336699;text-align:center"><%= image_tag current_user.image, :size => "100x100" %>&nbsp&nbsp<%= current_user.first_name %> 
+<%= current_user.last_name %>'s Wishes</h4>
+<hr>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+	<div>
+		<h5><font size = 5px>&nbsp;  Wish Filter : &nbsp;</td></font>
+		<%= link_to 'All', filter_event_status_path('All'), :style=>'color:#336699' %> &nbsp; | &nbsp;
+		<%= link_to 'Newly added wish', filter_event_status_path('Newly added event'), :style=>'color:#336699' %> &nbsp; | &nbsp;
+		<%= link_to 'Upcomming wish',filter_event_status_path('Upcomming event'), :style=>'color:#336699' %> &nbsp; | &nbsp; 
+		<%= link_to 'Ongoing wish', filter_event_status_path('Ongoing event'), :style=>'color:#336699' %> &nbsp; | &nbsp;
+		<%= link_to 'Finished wish', filter_event_status_path('Finished event'), :style=>'color:#336699' %></h5>
+	<div>
+<br>
+<br>
+<tbody>
+<% @events.each do |event| %>
+	<% event.event_products.each do |event_product| %>
+		<div class="col-sm-4 col-lg-4 col-md-4">
+			<div class="thumbnail">	
+				<div style="padding:4px">
+              		<!--<img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">-->
+				<%= link_to (image_tag event_product.get_product_image(event_product.product_id), :size => "100x150"), event_product %>
+					<!--<%= image_tag event_product.get_product_image(event_product.product_id), :size => "100x150" %>-->
+            	</div>
+				<div class="caption">
+					<ul>
+						<h5><b style="color:#336699;">Wish Name: </b><%=link_to event.event_name,event %></h5>
+						<% if event.status == 'Finished event' %>
+	  						<h5><b style="color:#336699;">Status: </b><font color="red"><%= event.get_status %></font></h5>	
+						<% else %>
+							<h5><b style="color:#336699;">Status: </b><%= event.get_status %></h5>	
+						<% end %>
+          				<h5><b style="color:#336699;">Wish Item: </b><%= link_to (event_product.get_product_name(event_product.product_id)), event_product %></h5>
+		   				<h5><b style="color:#336699;">Goal: </b><%= event_product.price_to_gain %>&nbspRS.</h5>
+					</ul>
+				</div>
+				<!--<% @percentage = 0 %>
+				<% @remaining_percentage = 100 %>-->
+				<% event_product.contributors.each do |contributor|%>
+					
+					<% contributor.get_total_contribution(event_product.id).each_pair do |key, value| %> 
+	             		<% @gain_price = event_product.price_to_gain %> 	
+						<% @total_contribution = value %>
+						<% @result = @gain_price - @total_contribution %>
+							
+						<% if @total_contribution > 0 %>
+							<% @percentage = (@total_contribution*100) /@gain_price %>
+							
+							<% if @percentage <= 100 %>
+								<% @remaining_percentage = 100 - @percentage %>	
+							<% else %>
+								<% @remaining_percentage = 0 %>
+							<% end %>
+
+						<% else %>
+							<% @percentage = 0 %>
+							<% @remaining_percentage = 100 %>
+						<% end %>
+					<% end %>
+				<% end %>
+				<div class="modal-footer" style="text-align: left">
+              		<div class="progress progress-striped active" style="background: #ddd">
+							<div class="bar bar-success" style="width: <%= @percentage %>%;"></div>
+              		</div>
+					<div class="row-fluid">
+						<div class="span4"><b><%= @percentage %>%</b><br/><small>FUNDED</small></div>
+                		<div class="span4"><b><%= @remaining_percentage %>%</b><br/><small>REMAIN</small></div>
+						<% days = (event.end_date - event.start_date).to_i %>
+                		<div class="span4"><b><%= days %></b><br/><small>DAYS</small></div>
+              		</div>
+				</div>
+				
+			</div>
+		</div>
+   	<% end %>		
+<% end %>
+</tbody>
+</table>
+</html>
+</div>

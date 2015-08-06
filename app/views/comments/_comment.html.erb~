@@ -1,0 +1,24 @@
+<% @event_product.comments.each do |comment| %>
+<p>
+   <table>
+	<tr>
+
+    	   <td align=left>&nbsp&nbsp<strong><b style="color:blue;text-align:left"><%= comment.get_user_name(comment.user_id) %> </b> </strong><br /></td>
+<tr>
+
+<td align=left>&nbsp&nbsp<strong><%=image_tag (comment.get_user_image(comment.user_id)),:width => 50, :height => 50  %>  </strong><br /></td>
+
+	   <td align=left>&nbsp&nbsp<%= h(comment.description) %></td>
+	   
+	   <td align=left>&nbsp&nbsp<strong>Posted <%= time_ago_in_words(comment.created_at) %></strong></br></td>
+	   
+	   <% if comment.user_id == current_user.id %>
+	   <td align=left>&nbsp&nbsp<%= link_to 'Destroy', comment, method: :delete, :remote => true %></td>
+	   <% end %>
+</tr>
+
+	  </tr>
+    </table>
+</p>
+<% end %>
+<td> <b style="color:green;text-align:left"><%= pluralize @event_product.comments.size, "comment" %> </b> </td>	

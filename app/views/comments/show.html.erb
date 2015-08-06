@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @comment.get_user_name(@comment.user_id) %>
+</p>
+
+<p>
+  <strong>Event product:</strong>
+  <%= @comment.event_product_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @comment.description %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @comment.image_url(:logo) %>
+</p>
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', event_products_path %>

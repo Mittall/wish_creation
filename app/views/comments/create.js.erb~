@@ -1,0 +1,9 @@
+/* Add the new comment to the bottom of the comments list */
+$("#comments").html("<%= escape_javascript(render("comment")) %>");
+
+ 
+/* Reset the comment form */
+$("#new_comment")[0].reset();
+
+
+

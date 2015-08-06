@@ -1,0 +1,79 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            <a class="navbar-brand" href="/dashboard"> <font color="#FFFF00"><b>make</b></font><font color="#00FF00"><b>A</b></font><font color="FFFF00"><b>wish</b></font><span><%= image_tag "star.jpg", :size => "20x20" %></a>
+					
+	   </div>
+           <div class="container-fluid nav-collapse">
+        <ul class="nav">
+        	<% if current_user %>
+          	<% if is_admin? %>
+          		<li><%= link_to t("general.users"), admin_users_path  %></li>
+          	<% end %>
+          <% end %>	
+        </ul>
+
+
+        <ul class="nav pull-right">
+        	<% unless current_user %>
+        		<!-- <li><%= link_to t("general.contact_us"), "/contact_us"  %></li> -->
+          	<li><%= link_to t("general.sign_up"), "/signup"  %></li>
+          	<li><%= link_to t("general.login"), "/login"  %></li>
+						<li><%= link_to (image_tag ("fb.png"), :size => "20x20"), "/auth/facebook" %></li>
+ 						<li><%= link_to (image_tag ("twit1.png"), :size => "20x20"), "/auth/twitter" %></li>
+ 						<li><%= link_to (image_tag ("Linkdin.jpg"), :size => "20x20"), "/auth/linkedin" %></li>
+						<li id="disp"><%= link_to (image_tag ("cart1.png"), :size => "20x20"), "" %>
+							<div id='popup'>Your Cart is Empty</div>
+						</li>
+				</ul>
+
+	
+          <% else %>        	
+          	<% if is_admin? %>
+		          <li class="dropdown dropdownHeight">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><Dropdown><%= t("general.admin_setup") %> <b class="caret"></b></a>
+		            <ul class="dropdown-menu">
+		          		<li><%= link_to t("general.footer_pages"), admin_footer_pages_path  %></li>
+		          		<li><%= link_to t("general.contacts"), admin_contacts_path  %></li>
+		          		<li><%= link_to t("general.languages"), admin_languages_path  %></li>
+		          		<li><%= link_to t("general.email_templates"), admin_email_templates_path  %></li>
+		          		<li><%= link_to t("general.settings"), admin_settings_path  %></li>
+		            </ul>
+			        </li>   
+          	<% end %> 
+	          <li class="dropdown dropdownHeight">
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><Dropdown><div class="nav pull-right"><%= image_tag current_user.image, :size => "30x30" %><%= t("general.welcome_user", :username => current_user.name) %></div> <b class="caret"></b></a>
+					
+	            <ul class="dropdown-menu">
+		          	<li><%= link_to t("general.profile"), "/profile"  %></li>
+		          	<li><%= link_to t("general.change_password"), "/change_password"  %></li>
+		          	<li><%= link_to t("general.logout"), "/logout"  %></li>
+	            </ul>
+		        </li>
+
+								
+								<li id="disp"><%= link_to (image_tag ("cart1.png"), :size => "20x20"), "/carts" %>
+									<% cnt = current_user.carts.count %>	
+									<% if cnt > 0 %>
+											<div id='popup'>Your cart have <%= cnt %> items <br>
+													<%=link_to 'View Cart', carts_path %>
+												
+											</div>
+									<% else %>
+											<div id='popup'>Your cart is Empty </div>
+									<% end %>
+								</li>
+         <% end %> 	
+        </ul>
+	</div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+</nav>
+ 

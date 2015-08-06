@@ -1,0 +1,10 @@
+/* Destroy the comment  of the comments list */
+
+$("#comments").html("<%= escape_javascript(render("comment")) %>");
+
+/* Reset the comment form */
+$("#destroy_comm")[0].reset();
+
+
+
+

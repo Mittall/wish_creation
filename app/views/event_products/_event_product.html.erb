@@ -1,0 +1,60 @@
+<h4> <%= pluralize @event.event_products.size, "products" %> </h4>
+<% @event.event_products.each do |event_product| %>
+<p id="notice"><%= notice %></p>
+
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+	<div class="thumbnail">	
+		<div style="padding:4px">
+              	<%= link_to (image_tag event_product.get_product_image(event_product.product_id), :size => "100x150"), event_product %>
+			<!--<%= image_tag event_product.get_product_image(event_product.product_id), :size => "100x150" %>-->
+            	</div>
+	<div class="caption">
+	<ul>
+		<h5><b style="color:#336699;">Event: </b><%= event_product.get_event_name(event_product.event_id) %></h5>
+		<h5><b style="color:#336699;">Product: </b><%= event_product.get_product_name(event_product.product_id) %></h5>
+		<h5><b style="color:#336699;">Price to gain: </b><%= event_product.price_to_gain %></h5>
+		<%= link_to 'Destroy', event_product, method: :delete %> |
+		<%= link_to 'Edit', edit_event_path(@event), :style=>'color:#336699' %> |
+		<%= link_to 'Back', events_path, :style=>'color:#336699' %>
+	</ul>
+	</div>
+	<!--<% @percentage = 0 %>
+				<% @remaining_percentage = 100 %>-->
+				<% event_product.contributors.each do |contributor|%>
+					
+					<% contributor.get_total_contribution(event_product.id).each_pair do |key, value| %> 
+	             		<% @gain_price = event_product.price_to_gain %> 	
+						<% @total_contribution = value %>
+						<% @result = @gain_price - @total_contribution %>
+							
+						<% if @total_contribution > 0 %>
+							<% @percentage = (@total_contribution*100) /@gain_price %>
+							<% if @percentage <= 100 %>
+								<% @remaining_percentage = 100 - @percentage %>	
+							<% else %>
+								<% @remaining_percentage = 0 %>
+							<% end %>
+						<% else %>
+							<% @percentage = 0 %>
+							<% @remaining_percentage = 100 %>
+						<% end %>
+					<% end %>
+				<% end %>
+				<div class="modal-footer" style="text-align: left">
+              		<div class="progress progress-striped active" style="background: #ddd">
+							<div class="bar bar-success" style="width: <%= @percentage %>%;"></div>
+              		</div>
+					<div class="row-fluid">
+						<div class="span4"><b><%= @percentage %>%</b><br/><small>FUNDED</small></div>
+                		<div class="span4"><b><%= @remaining_percentage %>%</b><br/><small>REMAIN</small></div>
+						<% days = (@event.end_date - @event.start_date).to_i %>
+                		<div class="span4"><b><%= days %></b><br/><small>DAYS</small></div>
+              		</div>
+				</div>
+	</div>
+</div>
+
+
+<% end %>	
+

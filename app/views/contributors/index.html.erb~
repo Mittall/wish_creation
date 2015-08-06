@@ -1,0 +1,58 @@
+<h4 style="color:#336699;text-align:center"><b>LIST OF CONTRIBUTORS</b> </h4>
+<hr>
+
+<table>
+  
+<div>
+	<h5 style="color:black"><b>Contributors By : &nbsp</b></td></font>
+	<%= link_to 'Contribution Given by me', contribution_by_me_path('my'), :style=>'color:#336699' %> &nbsp | &nbsp
+	<%= link_to 'Contribution Receive by friend', contribution_by_friend_path('friend'), :style=>'color:#336699' %> &nbsp </h5>
+	<hr>
+</div>
+  <tbody>
+    <% total = 0%>
+    <% @contributor.each do |contributor| %>
+      
+		<% contributor.event_product_id %>
+		<% @user_product_id = contributor.get_product_id(contributor.event_product_id) %>
+		
+      
+		<% @user_event_id = contributor.get_event_id(contributor.event_product_id) %>
+
+
+		<div class="row">
+			<div class="col-md-3">
+
+		<h5 style="color:black"><b>Event name : </b><%= contributor.get_event_name(@user_event_id)%></h5> <br>
+		<!--<b>Wish Product</b> : <%= contributor.get_product_name(@user_product_id) %>-->
+		<% @event_product_image =  contributor.get_product_id(contributor.event_product_id) %>
+	  <%=image_tag(contributor.get_product_image(@event_product_image), :size => "150x100") %>
+		</div>
+	
+		<div class="col-md-9">
+		<h5 style="color:black"><b>Contributor Name : </b> <%= contributor.get_user_name(contributor.user_id) %></h5>
+		<h5 style="color:black"><b>Friend Name : </b> <%= contributor.get_user_name(contributor.user_contribute_id) %></h5>
+    
+		
+    <h5 style="color:black"><b>Given price : </b> <%= contributor.given_price %></h5>
+		<h5 style="color:black"><b>Posted : </b><%= time_ago_in_words(contributor.created_at) %> ago</h5>
+		<br>
+		<hr>
+			</div>
+		
+    
+     
+	
+		</div>
+     <% end %>	
+		
+	
+
+  </tbody>
+
+</table>
+
+<br>
+<h5 style="color:#336699;text-align:center"><%= will_paginate @contributor, :previous_label => 'Previous', :next_label => 'Next' %></h5>
+
+

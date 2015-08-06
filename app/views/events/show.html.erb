@@ -1,0 +1,78 @@
+<p id="notice"><%= notice %></p>
+
+<h3> Wish Description</h3>
+<!--
+<p>
+  <strong>User:</strong>
+  <%= @event.user_id %>
+</p>
+!-->
+
+
+<p>
+  <strong>Wish name:</strong>
+  <%= @event.event_name %>
+</p>
+
+<p>
+  <strong>Wish description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @event.status %>
+</p>
+
+<p>
+  <strong>Start Date:</strong>
+  <%= @event.start_date.strftime("%d-%m-%Y") %>
+</p>
+
+<p>
+  <strong>End Date:</strong>
+  <%= @event.end_date.strftime("%d-%m-%Y") %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
+
+<hr>
+<!--<div id= "event_product_form">-->
+<h3>Wish Items</h3>
+
+<div id="event_products">
+	<%= render "event_products/event_product" %>
+</div>
+
+<%= form_for [@event, EventProduct.new], :remote => true do |f| %>
+	
+<br>
+
+	<div class="row">  </div>
+   <p>
+	<hr>
+	<!--<h4> <%= pluralize @event.event_products.size, "event_products" %> </h4>-->
+	<br>
+  	<div class="field">
+    	<h5><b> Select Event Item </b></h5>
+    	<%= select("event_product","product_id",Product.find(:all).collect {|c| [c.product_name,c.id] }, {:include_blank => '-- Select --'}, :class => "span3") %>
+</p>
+  	</div>
+
+       <div class="control-group">
+      		<%= f.label :price_to_gain, :class => 'control-label' %>
+      			<div class="controls">
+        			<%= f.number_field :price_to_gain, :required => true, :class => 'span3' %>
+     			 </div>
+    	</div>
+
+
+  <div class="actions">
+    <%= f.submit 'Submit', :class => 'btn btn-primary' %>
+  </div>
+   </p>
+
+<% end %>
+<!--</div>  div id = "event_product_form" -->
+</div>

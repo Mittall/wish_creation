@@ -1,0 +1,7 @@
+/* Destroy the product  from the wish list */
+$("#cart_details").html("<%= escape_javascript(render("cart")) %>");
+
+/* Reset the wish form */
+$("#destroy_cart")[0].reset();
+
+

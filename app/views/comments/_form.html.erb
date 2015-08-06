@@ -1,0 +1,43 @@
+<%= form_for (@comment) do |f|  %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<br><br>
+<!--  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :event_product_id %><br>
+    <%= f.number_field :event_product_id %>
+  </div>--!>
+
+  <div class="field">
+    <%= f.label :Leave_a_Comment %><br>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="control-group">
+        <%= f.label :User_Image, :class => 'control-label' %>
+        <div class="controls">
+            <%= f.file_field :image, :class => 'input-xlarge' %>
+        </div>
+  </div>
+  <% if @comment.image? %>
+        <div class="control-group"><div class="controls"><%= image_tag @comment.image_url(:logo) %></div></div>
+  <% end %>
+<br><br>
+    <%= f.submit %>
+  </div>
+<br>
+<% end %>
+

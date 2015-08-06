@@ -1,0 +1,5 @@
+<% @categories.each do |category| %>
+
+	<b><%=link_to category.name, category %> (<%= pluralize category.products.size, "" %>)</b><br>
+     
+<% end %>

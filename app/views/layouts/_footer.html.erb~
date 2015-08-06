@@ -1,0 +1,49 @@
+<div class="footer black">
+		<div class="container">
+			<!-- div class="arrow"><b class="caret"></b></div -->
+		    <div class="row">
+				
+			 			  <div class="col-md-3 col-sm-3">
+				<div>
+				<h3>Information</h3>
+				<ul>
+				  <li><a href="/about_us" >About us</a> </li>	
+				  <li><a href="/privacy_policy" >Privacy Policy</a> </li>	
+				  <li><a href="/terms_and_condition" >Terms & Conditions</a> </li>	
+				</ul>
+				</div>
+			  </div>
+			  			 
+			  
+			  <div class="col-md-3 col-sm-3">
+				<div>
+				<h3>Customer Service</h3>
+				<ul>
+				  
+				  <li><a href="/contact_us" >Contact us</a> </li>				  
+				</ul>
+				</div>
+			  </div>
+
+			  <div class="col-md-3 col-sm-3">
+				<div>
+				<h3>My Account</h3>
+				<ul>
+				  <li><a href="/profile">My Account</a></li>
+				  <!--<li><a href="/wishes">My Wishlist</a></li>-->
+				</ul>
+				</div>
+			  </div>
+
+			  <div class="col-md-3 col-sm-3">
+					<h3>Social Media </h3>
+					
+				&nbsp; <a href="http://www.facebook.com"><%= image_tag "fb.png", :size => "30x30" %></a> &nbsp;
+				<a href="http://twitter.com"><%= image_tag "twit1.png", :size => "30x30" %></a> &nbsp;
+				<a href="http://www.plus.google.com/"><%= image_tag "g+.png", :size => "30x30" %></a> 
+
+			</div>
+
+	   </div>	
+	</div>
+ </div>

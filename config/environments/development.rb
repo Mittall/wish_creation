@@ -36,8 +36,8 @@ ProjectApp::Application.configure do
   BASE_URL = "http://localhost:3007"
   BASE_URL_DOMAIN = "localhost:3007"
   
-  MAIL_USER_NAME = "nbarai77@gmail.com"
-  MAIL_PASSWORD = "nitin@@@777"
+  MAIL_USER_NAME = "anshul.vitrainee@gmail.com"
+  MAIL_PASSWORD = "anshul1234"
   MAIL_PORT = "587"
   MAIL_ADDRESS = "smtp.gmail.com"
   MAIL_DOMAIN = "gmail.com"   

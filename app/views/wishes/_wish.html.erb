@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row">
+        <div>
+            
+   		 <% if (@count.to_i) > 0 %>
+                      <label class="pull-right" style="color:#336699;"> <h4>Wish Items <font color ="green">(<%= @count %>)</h4>  </font></label> 
+		<table class="table table-hover">
+		   <thead>
+                    <div class="row">
+                    <tr>
+                        <th>Product</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+			
+		         <% total = 0 %>
+		    <% @wishes.each do |wish| %>
+				
+                    <tr>
+ 					
+                        <td class="col-sm-8 col-md-6">
+												
+                        <div class="media">
+										
+                            <%= image_tag wish.get_product_image(wish.product_id) , :width => 150 %>
+														
+                            <div class="media-body">
+                                <h4 class="media-heading"><%= wish.get_product_name(wish.product_id) %></a></h4>
+                                <!--<input type="email" class="form-control" id="exampleInputEmail1" value= <%= wish.amount %>>-->
+                            </div>
+                        </div></td>
+                        
+                        <td class="col-sm-1 col-md-1">
+                       
+	<%= link_to 'Remove', wish, method: :delete, :remote => true %>
+									
+</td>
+                    </tr>
+			
+                   <% end %>
+      
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+						 <td>   </td>
+                        <td>
+             
+                        <!--<button type="button" class="btn btn-default" href="/categories">
+                           <%= image_tag "cart.png" %> </span> Continue Shopping
+                        </button>-->
+                          <%= link_to "Continue Shopping",categories_path %>  </td>
+                        <td>
+                        <!--<button type="button" class="btn btn-success">
+                            Checkout <span class="glyphicon glyphicon-play"></span>
+                        </button> -->
+			  <%= link_to 'checkout' %> </td> </td>
+                    </tr>
+					<% else %>
+		        	 <label class="pull-right" style="color:#336699;"> <h4>Wish Items <font color ="red">(empty)</h4>  </font></label> 
+					 <% end %>	          
+                         
+		</div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>

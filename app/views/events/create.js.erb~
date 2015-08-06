@@ -1,0 +1,4 @@
+<% if @event.errors.any? %>
+  $('#new_event').effect('highlight', { color: '#FF0000'}, 1000); // for highlighting
+  // or add here whatever jquery response you want to have to your views.
+<% end %>

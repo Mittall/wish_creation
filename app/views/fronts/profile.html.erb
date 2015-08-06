@@ -42,20 +42,26 @@
         <%= f.label :image, :class => 'control-label' %>
         <div class="controls">
             <%= f.file_field :image, :class => 'input-xlarge' %>
+
         </div>
     </div>
     <% if @o_single.image? %>
         <div class="control-group"><div class="controls"><%= image_tag @o_single.image_url(:logo) %></div></div>
     <% end %>
     
-	<div class="form-actions">
+
+<div class="form-actions">
         <div class="row-fluid mb10">
             <div class="span12">
                 <%= f.submit t("general.save"), :class => 'btn btn-primary' %>
             </div><!--/span-->
         </div><!--/row-->
     </div>
+
+
+</div>
 <% end %>
+
 
 <script type="text/javascript">
 

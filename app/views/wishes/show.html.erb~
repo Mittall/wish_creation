@@ -1,0 +1,64 @@
+<script src="http://connect.facebook.net/en_US/all.js" type="text/javascript" charset="utf-8"></script>
+<div id="fb-root"></div>    
+<script type="text/javascript" charset="utf-8">
+FB.init({
+    appId: '1416252865305926', 
+    status: true, 
+    cookie: true,
+    xfbml: true
+});
+
+function share_prompt()
+{
+
+
+    FB.ui(
+       {
+         method: 'feed',
+         name: 'Fullfill Your Wish',
+         link: 'http://goo.gl/5oIR',
+         //picture: '<%= image_tag "images.jpg" %>',
+         caption: 'Our application is to fullfill the user wishes by collecting the fund from friend for their events.'
+         description: 'My Wish is "<%= @wish.get_product_name(@wish.product_id) %>" For that i wanted "<%= @wish.amount %>" Rs.amount so send me your contribution for my wish.',
+         message: 'Make easy to collecting gift of your wish!'
+       },
+       function(response) {
+         if (response && response.post_id) {
+           alert('Your Wish was published.');
+         } else {
+           alert('Your Wish was not published.');
+         }
+       }
+     );
+ }
+
+</script>
+
+<p id="notice"><%= notice %></p>
+
+<!--<p>
+  <strong>User:</strong>
+  <%= @wish.user_id %>
+</p>-->
+
+<p>
+  <strong>Product:</strong>
+  <%= @wish.get_product_name(@wish.product_id) %>
+</p>
+
+<p>
+  <%= image_tag(@wish.get_product_image(@wish.product_id)) %>
+</p>
+
+<p>
+	<strong>Amount:</strong>
+  <%= @wish.amount %>
+</p>
+
+<div class="col-md-4">
+<%= image_tag "fb.png", :size => "20x20" %><input type="button" onclick="share_prompt()" value="Share" >  </input>
+</div>
+
+
+<%= link_to 'Edit', edit_wish_path(@wish) %> |
+<%= link_to 'Back', wishes_path %>

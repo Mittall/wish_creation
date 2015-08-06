@@ -1,0 +1,31 @@
+<% @total_contribution = 0 %>
+<% @result = 0 %>
+
+<% @event_product.contributors.each do |contributor| %>
+<p>
+   <table>
+	<tr>
+    	<td><%= contributor.get_user_name(contributor.user_id) %></td>
+		<div class ="pull-right"><%= contributor.given_price %></div>	
+	 </tr>
+    </table>
+
+		<%  contributor.get_total_contribution(@event_product.id).each_pair do |key, value| %> 
+		<hr>
+	        <% @gain_price = @event_product.price_to_gain %> 	
+			<% @total_contribution = value %>
+			<% @result = @gain_price - @total_contribution %>
+		<% end %>	
+</p>
+		
+
+<% end %>
+
+
+			<b style="color:green"><div class ="pull-left">Total Contribution </div> <div class="pull-right"><%= @total_contribution %></div></b><br>
+			<% if @result > 0 %>
+				<hr><b style="color:red"><div class ="pull-left">Remaining</div> <div class="pull-right"> <%= @result %>  </div> </b> 
+			<% else %>
+				<hr> &nbsp <b style="color:green"> <div class="pull-right"> Achieved  </div> </b> </div>
+			<% end %>
+		      

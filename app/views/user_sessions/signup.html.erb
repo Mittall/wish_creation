@@ -3,12 +3,14 @@
 		<%= t("general.sign_up") %>
 	</h4>
 </div>
+
 <%= form_for @o_single, :url => signup_path, :html => { :class => 'form-horizontal' } do |f| %>
+
 	<div class="control-group">
       <div class="controls">
         <%= f.text_field :first_name, :class => 'input-xlarge', :placeholder => 'First name' %>
        	<% if @o_single.errors[:email].any? %>
-        	<span class="text-error text-message"><%= @o_single.errors[:first_name].first %></span>
+        	<span class="text-error text-message">First name <%= @o_single.errors[:first_name].first %></span>
       	<% end %>
       </div>
     </div>
@@ -17,7 +19,7 @@
       <div class="controls">
         <%= f.text_field :last_name, :class => 'input-xlarge', :placeholder => 'Last name' %>
        	<% if @o_single.errors[:last_name].any? %>
-        	<span class="text-error text-message"><%= @o_single.errors[:last_name].first %></span>
+        	<span class="text-error text-message">Last name <%= @o_single.errors[:last_name].first %></span>
       	<% end %>
       </div>
     </div>
@@ -26,7 +28,7 @@
       <div class="controls">
         <%= f.text_field :email, :class => 'input-xlarge', :placeholder => 'Email' %>
        	<% if @o_single.errors[:email].any? %>
-        	<span class="text-error text-message"><%= @o_single.errors[:email].first %></span>
+        	<span class="text-error text-message">Email <%= @o_single.errors[:email].first %></span>
       	<% end %>
       </div>
     </div>
@@ -35,19 +37,40 @@
       <div class="controls">
         <%= f.password_field :password, :class => 'input-xlarge', :placeholder => 'Password' %>
        	<% if @o_single.errors[:password].any? %>
-        	<span class="text-error text-message"><%= @o_single.errors[:password].first %></span>
+        	<span class="text-error text-message">Password <%= @o_single.errors[:password].first %></span>
       	<% end %>
       </div>
     </div>
 
-    <div class="control-group">
+  <!--  <div class="control-group">
       <div id="user_birth_date" class="controls">
 		<%= f.text_field :birth_date, :class => 'input-xlarge', :placeholder => 'Birth Date' %>
         <span class="add-on">
             <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+        </span> 
+	
+       	<% if @o_single.errors[:birth_date].any? %>
+        	<span class="text-error text-message"><%= @o_single.errors[:birth_date].first %></span>
+      	<% end %>
+
+			
+	</div>	   
+    </div>-->
+
+
+<div class="field">	
+   <div class="control-group">
+	
+      <div id="datepicker" class="controls">	
+		<%= f.text_field :birth_date, :required => true, :class => 'input-xlarge', :placeholder => 'Birth Date' %>
+        <span class="add-on">
+            <i class="icon-calendar"></i>
         </span> 				
+	</div>
 	</div>	   
     </div>
+
+
 		 
     <div class="control-group">
         <div class="controls">
@@ -77,12 +100,14 @@
       </div>
     
 <% end %>
-
+</div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script type="text/javascript">
-
-$('#user_birth_date').datetimepicker({
+$(function() {
+$('#user_birth_date').datepicker({
     language: 'en',
     format: "dd/MM/yyyy"
   });
-
+});
 </script>  

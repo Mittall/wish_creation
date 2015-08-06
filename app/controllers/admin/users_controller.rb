@@ -7,8 +7,10 @@ class Admin::UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    session[:search_params] = params[:user] ? params[:user] : nil
+    #@user = User.all
 
+    session[:search_params] = params[:user] ? params[:user] : nil
+	
     session[:set_pager_number] = params[:set_pager_number] if params[:set_pager_number]
 
     if session[:set_pager_number].nil?
@@ -27,7 +29,9 @@ class Admin::UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
+
   def show
+     #@user = User.all
   end
 
   # GET /users/new
@@ -80,6 +84,10 @@ class Admin::UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def share
+	@user = User.all #find(params[first_name])
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -110,5 +118,5 @@ class Admin::UsersController < ApplicationController
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
-
+  
 end

@@ -1,0 +1,59 @@
+<div id="cart">
+     <% total = 0 %>
+		    <% @carts.each do |cart| %>
+				
+                    <tr>
+ 					
+                        <td class="col-sm-8 col-md-6">
+												
+                        <div class="media">
+
+                            <%= image_tag cart.get_product_image(cart.product_id) , :width => 150 %>
+                            <div class="media-body">
+                                <h4 class="media-heading"><%= cart.get_product_name(cart.product_id) %></a></h4>
+                                <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                            </div>
+                        </div></td>
+                        <td class="col-sm-1 col-md-1" style="text-align: center">
+                        <input type="email" class="form-control" id="exampleInputEmail1" value= <%= cart.qty %>>
+                        </td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong><%= cart.get_product_price(cart.product_id) %></strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong><%= cart.get_product_price(cart.product_id) * cart.qty %></strong></td>
+                          <td><% total = total + cart.get_product_price(cart.product_id) * cart.qty %> </td>
+                        <td class="col-sm-1 col-md-1">
+                       <!-- <button type="button" class="btn btn-danger">
+           <span class="glyphicon glyphicon-remove"></span> <%= link_to 'Remove', cart, method: :delete, data: { confirm: 'Are you sure?' } %>
+   </button> -->
+	<%= link_to 'Remove', cart, method: :delete, :remote => true %>
+									
+</td>
+                    </tr>
+			
+                   <% end %>
+							
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+						 <td>   </td>
+                        <td><h5>Subtotal</h5></td>
+                        <td class="text-right"><h5><strong><%= total %></strong></h5></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+						 <td>   </td>
+                        <td><h5>Estimated Taxes</h5></td>
+                        <% tot = (total * 2) / 100 %>
+                        <td class="text-right"><h5><strong><%= tot %></strong></h5></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+						 <td>   </td>
+                        <td><h3>Total</h3></td>
+                        <td class="text-right"><h3><strong><%= tot = total + tot %></strong></h3></td>
+                    </tr>
+</div>

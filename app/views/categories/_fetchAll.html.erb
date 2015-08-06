@@ -1,0 +1,96 @@
+<h4 style="color:#336699;text-align:center"><b>SELECT PRODUCTS</b> </h4>
+<hr>
+<%= form_tag categories_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] , :class => 'input-xlarge' %> &nbsp;
+    <%= submit_tag "Search", :name => nil , :class => 'btn btn-primary'%>
+  </p>
+
+<% end %>
+
+<table>
+   <!--<thead>
+    <tr>
+     <th align=left><h2><i>Category</h2></i></th>
+     <th>Name</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th> 
+    </tr>
+  </thead> -->
+
+  <hr /> 
+
+  <tbody>
+   	<div id="temp">
+				<% if is_admin? %>
+					<b><%= link_to "Add New Category",new_category_path, id: "new_category_link", remote: true  %> </b> |
+  				<b><%= link_to "Add New Product",new_product_path, id: "new_product_link", remote: true %> </b> 
+  				<hr />
+    		<% end %>	
+
+   		<% @categories.each do |category| %>
+				<div class="col-sm-12">   
+					<% if is_admin? %>
+						<b><%= link_to 'Destroy Category', category, method: :delete, remote: true %></b>
+					<% end %>	
+					<h4>
+					<b style="color:blue;text-align:left"><%=link_to category.name,category %> (<%= pluralize category.products.size, "product" %>)
+					</b>
+					</h4>
+
+					<%- category_product = category.products.each_slice(3).to_a %>
+					<div class="col-sm-12">
+						<div data-ride="carousel" class='carousel slide' id="carousel_<%= category.id %>">
+							<div class="carousel-inner">
+								<% category_product.each_with_index do |product_list, index| %>
+					
+									<div class="item <%= 'active' if index == 0 %>">
+										<% product_list.each do |product| %>
+											<div class="col-sm-4 col-lg-4 col-md-4">
+												<div class="thumbnail">
+														<div style="padding:4px">
+															<%= link_to (image_tag product.image_one_url, :size => "50x50"), product %>
+															<br />
+															
+															<div class="caption">
+																<ul>
+																	<h5>
+																		<b style="color:#336699;">Product Name: </b>
+																		<%= link_to product.product_name, product, :style=>'color:#336699' %>
+																	</h5>
+							
+																	<h5><b style="color:#336699;">Price: </b><%= product.price %></h5>	
+																	<h5><b style="color:#336699;">Description: </b><%= product.description %></h5>
+																</ul>
+															</div> <!--caption-->
+															
+															<hr />
+															<div class="separator clear-left">
+																<p class="pull-left">
+																	<!--<i class="fa fa-shopping-cart"></i><%= link_to "Add To Cart",new_cart_path(product) %>-->
+																</p>
+
+																<p class="pull-right">
+																	<i class="fa fa-list"></i><%= link_to "More details", product %></p>
+															</div> <!--separator clear-left-->
+																			
+															<div class="clearfix">
+															</div>
+														</div>
+												</div>
+											</div>
+										<% end %>
+									</div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+  </tbody>
+</table>
+<br>
+<%= will_paginate @categories, :previous_label => 'Previous', :next_label => 'Next' %>

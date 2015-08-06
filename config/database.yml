@@ -6,7 +6,7 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: nitin_project_app
+  database: user_wishes
   pool: 5
   username: root
   password: root

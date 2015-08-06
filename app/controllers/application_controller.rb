@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+
+  require 'will_paginate/array'
+  before_filter :getcategories
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -6,6 +9,8 @@ class ApplicationController < ActionController::Base
 	SUPER_ADMIN = "SuperAdmin"
 	USER = "User"
 
+
+ 
   private
 
     def current_user_session
@@ -33,9 +38,9 @@ class ApplicationController < ActionController::Base
     def authenticate_email(email)
       user = User.where(:email => email).first
       if user
-			  return user
-	    end
-	    return false
+				return user
+      end
+    return false
     end
 
     def authenticate_change_password(password)
@@ -47,12 +52,20 @@ class ApplicationController < ActionController::Base
 	    return false
     end
 
-	  def is_admin?
-		  session[:user_role] == SUPER_ADMIN
-	  end
+    def is_admin?
+	session[:user_role] == SUPER_ADMIN
+    end
 
     def is_user?
-	   session[:user_role] == USER
+	session[:user_role] == USER
+    end
+
+    def user_is_logged_in?
+    	!!session[:user_id]
+    end
+	
+	def getcategories
+		@categories = Category.all
     end
 
 end

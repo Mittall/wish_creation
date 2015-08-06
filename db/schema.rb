@@ -11,7 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102083559) do
+ActiveRecord::Schema.define(version: 20140513053847) do
+
+  create_table "authorizations", force: true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "carts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.integer  "qty"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", force: true do |t|
+    t.integer  "category_id"
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "event_product_id"
+    t.string   "description"
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contacts", force: true do |t|
     t.integer  "user_id"
@@ -23,12 +56,40 @@ ActiveRecord::Schema.define(version: 20140102083559) do
     t.datetime "updated_at"
   end
 
+  create_table "contributors", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "event_product_id"
+    t.integer  "given_price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_contribute_id"
+  end
+
   create_table "email_templates", force: true do |t|
     t.string   "subject"
     t.text     "content"
     t.string   "email_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "event_products", force: true do |t|
+    t.integer  "event_id"
+    t.integer  "product_id"
+    t.integer  "price_to_gain"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: true do |t|
+    t.integer  "user_id"
+    t.string   "event_name"
+    t.string   "description"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
   create_table "footer_pages", force: true do |t|
@@ -53,6 +114,25 @@ ActiveRecord::Schema.define(version: 20140102083559) do
   create_table "messages", force: true do |t|
     t.string   "message"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "posts", force: true do |t|
+    t.string   "name"
+    t.text     "body"
+    t.integer  "rating"
+    t.boolean  "published"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products", force: true do |t|
+    t.integer  "category_id"
+    t.string   "product_name"
+    t.string   "description"
+    t.string   "image_one"
+    t.integer  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -104,6 +184,14 @@ ActiveRecord::Schema.define(version: 20140102083559) do
     t.string   "registration_key"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "wishes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "amount"
   end
 
 end

@@ -1,0 +1,5 @@
+<div id="categories">
+<%= render 'fetchAll' %>
+</div>
+<br>
+<%= will_paginate @categories, :previous_label => 'Previous', :next_label => 'Next' %>

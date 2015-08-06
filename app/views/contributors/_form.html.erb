@@ -1,0 +1,34 @@
+<%= form_for(@contributor) do |f|  %>
+  <% if @contributor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contributor.errors.count, "error") %> prohibited this contributor from being saved:</h2>
+
+      <ul>
+      <% @contributor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!--<div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>--!>
+
+  <!--<div class="field">
+    <%= f.label :event_product_id %><br>
+    <%= f.number_field :event_product_id %>
+  </div>--!>
+
+<div class="control-group">
+      <%= f.label :Enter_price_to_contribute, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :given_price, :required => true, :class => 'input-xlarge' %>
+      </div>
+    </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

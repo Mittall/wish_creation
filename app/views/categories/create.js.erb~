@@ -1,0 +1,8 @@
+alert("hi");
+
+
+/* Replace the count of comments */
+$("#categories_count").html("<%= pluralize(Category.count, 'Category') %>");
+ 
+$("#temp").append("<%= escape_javascript(render(:partial => @category)) %>");
+$("#new_category")[0].reset();

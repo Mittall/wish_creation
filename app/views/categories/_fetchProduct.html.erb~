@@ -1,0 +1,6 @@
+<% @categories.each do |category| %>
+
+      <% category.products.each do |product| %>
+	      <%= link_to product.product_name, product, :style=>'color:#336699' %>
+      <% end %>
+<% end %>

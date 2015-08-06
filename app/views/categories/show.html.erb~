@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+ <% @category.products.each do |product| %>
+        
+            <div class="col-sm-4 col-lg-4 col-md-4">
+			<div class="thumbnail">	
+				<div style="padding:4px">
+              		<!--<img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">-->
+						<%= link_to (image_tag product.image_one_url, :size => "50x50"), product %>
+            	</div>
+				<div class="caption">
+					<ul>
+						<h5><b style="color:#336699;">Product Name: </b><%= link_to product.product_name, product, :style=>'color:#336699' %></h5>
+						
+	  						<h5><b style="color:#336699;">Price: </b><%= product.price %></h5>	
+
+		   				<h5><b style="color:#336699;">Description: </b><%= product.description %></h5>
+					</ul>
+				</div>
+
+					<hr />
+														<div class="separator clear-left">
+                  						<p class="pull-left">
+                  							<!--<i class="fa fa-shopping-cart"></i><%= link_to "Add To Cart",new_cart_path(product) %>-->
+															</p>
+
+                  						<p class="pull-right">
+                  							<i class="fa fa-list"></i><%= link_to "More details", product %></p>
+            								</div> <!--separator clear-left-->
+                                   
+				 										<div class="clearfix">
+                 						</div>
+			
+             </div>
+</div>
+
+      <% end %>
+
+<!-- <%= link_to 'Back', categories_path %> -->
+</div>
+<br>
+<%= will_paginate @categories, :previous_label => 'Previous', :next_label => 'Next' %>

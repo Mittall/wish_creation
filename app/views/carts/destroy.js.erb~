@@ -1,0 +1,7 @@
+/* Destroy the product  from the cart list */
+$("#fetch_cart").html("<%= escape_javascript(render("cart")) %>");
+
+/* Reset the cart form */
+$("#destroy_cart")[0].reset();
+
+

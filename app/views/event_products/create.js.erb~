@@ -1,0 +1,5 @@
+/* Add the new Event Product to the particular event'list */
+$("#event_products").html("<%= escape_javascript(render("event_product")) %>");
+
+/* Reset the event_product form */
+$("#event_product_form")[0].reset();

@@ -1,0 +1,113 @@
+<h5 style="color:#336699;text-align:right"><%= current_user.first_name %>&nbsp<%= current_user.last_name %> - Friends (<%= @count_user %>)</h5>
+<h5 style="color:#336699;text-align:center"><%= will_paginate @event_products, :previous_label => 'Previous', :next_label => 'Next' %></h5>
+
+<%= form_tag friend_users_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] , :class => 'input-xlarge' %> &nbsp;
+    <%= submit_tag "Search", :first_name => nil , :class => 'btn btn-primary'%>
+  </p>
+
+<% end %>
+
+<div class="row">
+	<ul class="nav">
+		<li class="dropdown">
+			<% cnt = 0 %>
+			<% @users.each do |user| %>	
+				<a href="cnt" data-toggle="dropdown" class="wishesRow">    
+					<div class="row">
+						<div class="col-md-4">
+							<%= image_tag user.image, :size => "100x100" %>
+							<b><%= user.first_name %>&nbsp<%= user.last_name %></b>
+						</div>
+						<div class="col-md-8">
+							<h5 style="color:#336699;text-align:center; padding-top:15px;"><b>Click to show WISHES</b></h5>
+							<!--<h5><b>Email </b>: <%= user.email %></h5>-->
+							<% cnt = cnt + 1 %>
+						</div>
+					</div>
+				</a>
+				
+				<div class="dropdown-menu multi-column">
+					<div class="container-fluid">
+						<div class="row-fluid">
+							<div class="span13">
+								<div class="row">
+									<%- user_events = user.events %>
+									<div class="col-sm-12">
+										<div data-ride="carousel" class='carousel slide' id="carousel_<%= user.id %>">
+											<div class="carousel-inner">
+												<% user_events.each do |event| %>
+													<%- event_eventProduct = event.event_products.each_slice(3).to_a %>
+													<%- rowCount = 0 %>
+													<% event_eventProduct.each_with_index do |event_product_list, index| %>
+														
+														<div class="item <%= 'active' if rowCount == 0 %>">
+															<% event_product_list.each do |event_product| %>
+																<div class="col-sm-3 col-lg-3 col-md-3">			
+																	<div class="thumbnail">	
+																		<div style="padding:4px">
+																			<%= link_to (image_tag event_product.get_product_image(event_product.product_id), :size => "100x150"), event_product %>
+																		</div> <!-- padding -->
+																		<% @contributor.get_total_contribution(event_product.id).each_pair do |key, value| %> 
+																			<% @gain_price = event_product.price_to_gain %> 	
+																			<% @total_contribution = value %>
+																			<% @result = @gain_price - @total_contribution %>
+																			<% if @total_contribution > 0 %>
+																				<% @percentage = (@total_contribution*100) /@gain_price %>	
+																				<% if @percentage <= 100 %>
+																					<% @remaining_percentage = 100 - @percentage %>	
+																				<% else %>
+																					<% @remaining_percentage = 0 %>
+																				<% end %>		
+																			<% else %>	
+																				<% @percentage = 0 %>
+																				<% @remaining_percentage = 100 %>
+																			<% end %>
+																		<% end %>
+
+																		<% @startdate = event_product.get_start_date(event_product.event_id) %>
+																		<% @enddate = event_product.get_end_date(event_product.event_id) %>
+																		<% days = (@enddate - @startdate).to_i %>
+
+																		<div class="modal-footer" style="text-align: left">
+																			<div class="progress progress-striped active" style="background: #ddd">
+																				<div class="bar bar-success" style="width: <%= @percentage %>%;">	</div>
+																			</div>
+																				
+																			<div class="row-fluid">
+																				<div class="span4"><b><%= @percentage %>%</b><br/><small>FUNDED</small>
+																				</div>      			        
+																				<div class="span4"><b><%= @remaining_percentage %>%</b><br/><small>REMAIN</small>
+																				</div>
+																				<div class="span4"><b><%= days %></b><br/><small>DAYS</small>
+																				</div>						
+																			</div>
+																				
+																			<hr />
+																			<%= button_to "contribute", event_product, :id => "button-cart",:class => "btn btn-primary", :method => :get %>
+																		</div>
+																	</div>
+																</div>
+															<% end %>
+														</div>
+														<% rowCount = rowCount + 1 %>
+													<% end %>
+													<% rowCount = 0 %>
+												<% end %>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</li>
+	</ul>
+</div>
+
+
+
+

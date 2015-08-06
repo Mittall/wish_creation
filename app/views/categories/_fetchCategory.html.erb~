@@ -1,0 +1,7 @@
+<% @categories.each do |category| %>
+
+	<li> <h6 style="color:#336699"><%=link_to category.name, category %>&nbsp(<%= pluralize category.products.size,"" %>) </h6> </li>
+     <!-- <% category.products.each do |product| %>
+	      <%= link_to product.product_name, product, :style=>'color:#336699' %>
+      <% end %> -->
+<% end %>

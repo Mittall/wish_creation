@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="col-md-5">
+		<br><br><br>
+  	 	<%= image_tag @product.image_one_url, :size => "300x400" %>
+				<br><br><br>
+					<% if is_admin? %>
+						<%= link_to 'Edit', edit_product_path(@product) %> |
+						<%= link_to 'Destroy', @product, method: :delete, data: { confirm: 'Are you sure?' } %> |
+					<% end %>
+			<%= button_to 'Back', categories_path, :class => "btn btn-primary", :method => :get  %>
+			<!--<%= link_to 'Back', products_path %>!-->
+	</div>
+	
+<div class="product-info">
+	<div class="col-md-6">
+		<div id="product">
+			<h3 style="color:#336699;text-align:left;font-weight:bold"> <%= @product.product_name.capitalize %></h3>
+			
+			<hr />
+				
+				<div class="description">
+				<ul>
+					<li><span style="color:#336699;text-align:left;font-weight:bold">Details: &nbsp </span> <%= @product.description %></li>
+					<br>
+					<li><span style="color:#336699;text-align:left;font-weight:bold">Availability: &nbsp </span> In Stock</li>
+					<br>
+					<li><span style="color:#336699;text-align:left;font-weight:bold">Price: &nbsp</b></span><%= @product.price %></li>
+					<br>
+				</ul>
+				</div>
+
+					<hr>
+				<form class="form-inline">
+
+			<!--	<%= button_to 'Add to Cart', new_cart_path(product_id: @product ) %> -->
+                   <%= image_tag "cart.png" %> <%= link_to "Add To Cart",new_cart_path(@product.id) %>  
+                   <!-- <%= link_to "Add To Wishlist",new_wish_path(@product.id) %>  -->   
+                     <br>     
+                    </form>
+				</div>
+			</div>
+		</div>
+	
+	</div>		
+
+</div>
+
+

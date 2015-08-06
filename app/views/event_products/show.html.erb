@@ -1,0 +1,120 @@
+<script src="http://connect.facebook.net/en_US/all.js" type="text/javascript" charset="utf-8"></script>
+<div id="fb-root"></div>    
+<script type="text/javascript" charset="utf-8">
+FB.init({
+    appId: '1416252865305926', 
+    status: true, 
+    cookie: true,
+    xfbml: true
+});
+
+function share_prompt()
+{
+    FB.ui(
+       {
+         method: 'feed',
+         name: 'Fullfill Your Wish',
+         link: 'http://goo.gl/5oIR',
+         //picture: '<%= image_tag "images.jpg" %>',
+         caption: 'Our application is to fullfill the user wishes by collecting the fund from friend for their events.',
+         description: 'My current event is "<%= @event_product.get_event_name(@event_product.event_id) %>" For that I have wish to buy "<%=  @event_product.get_product_name(@event_product.product_id) %>", So send me your contribution as gift for my event.',
+         message: 'Make easy to collecting gift of your wish!'
+       },
+       function(response) {
+         if (response && response.post_id) {
+           alert('Post was published.');
+         } else {
+           alert('Post was not published.');
+         }
+       }
+     );
+ }
+
+</script>
+<div>
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+	<div class="col-md-5">
+  	 <br><br><br>
+			<h4 style="color:blue;text-align:left"> <%= @event_product.get_event_name(@event_product.event_id) %>&nbsp;Wish</h4>
+			<%= image_tag @event_product.get_product_image(@event_product.product_id) , :size => "300x400" %>
+			<br> <br>
+			<% check_user = @event_product.get_user_id(@event_product.event_id) %>
+		<!--<%= check_user %>-->
+			<% if check_user != current_user.id %>
+				<%= form_for [@event_product, Contributor.new] do |f| %>
+					<div class="control-group">
+      			<%= f.label :Enter_Price_to_Contribute, :class => 'control-label'%> <br> <br>
+      				<div class="controls">
+        				<%= f.number_field :given_price, :required => true, :class => 'span4' %>
+      				</div>
+					</div> 
+
+  				<div class="actions">	
+						<%= f.submit 'Contribute' , :class =>'btn btn-primary' %>
+					</div>
+				<% end %>
+			<% end %>
+		</div> <!-- com md 5 -->
+
+		<div class="row contributor-info">
+			<div class="col-md-6">
+				<div class="col-md-6" id="contributor">
+					<hr />
+					<h4><b style="color:#336699;text-align:center">List of Contributors </b> </h4>
+					<hr />
+					<h5><b style="color:blue"> Contributor </b> 
+					<b style="color:blue"><div class="pull-right">Given Price </div> </b> </h5>
+					<hr /> 
+						<div id="contribute">
+							<%= render "contributors/contributor" %>
+						</div>                               
+				</div>
+			</div>
+		</div>
+</div> <!-- row -->
+
+  <%= button_to 'Back', friend_users_path, :class => "btn btn-primary", :method => :get %> 
+  
+	<div class="col-md-4">
+		<%= image_tag "fb.png", :size => "20x20" %><input type="button" onclick="share_prompt()" value="Share" >  </input>
+	</div>
+
+	<br><br><br><br>
+	<hr />
+	<h4 style="color:red;text-align:left">Comments</h4>
+
+	<div id="comments">
+		<%= render "comments/comment" %>
+	</div>
+	
+	<br><br><br>
+
+ <p>
+	<div>
+		<div class="row" style="margin-top:40px;">
+			<div class="col-md-6">
+				<div class="well well-sm">
+					<div class="text-right">
+            <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Add a Comment</a>
+          </div>
+						<div class="row" id="post-review-box" style="display:none;">
+              <div class="col-md-12">
+                <%= form_for [@event_product, Comment.new] , :remote => true do |f| %>		
+                  <%= f.text_area :description %>
+										<div class="text-right">
+											<a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
+                     <span class="glyphicon glyphicon-remove"></span>Cancel</a>
+											<button class="btn btn-success btn-lg" type="submit">Save</button>
+										</div>
+                </form>
+							</div> <!-- col md 12 -->
+            </div> <!--row -->
+        </div> <!-- well well sm -->
+      </div> <!-- col md 6 -->
+		</div> <!-- row -->
+	</div>	
+</p>
+</div>
+<% end %>	

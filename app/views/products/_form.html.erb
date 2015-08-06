@@ -1,0 +1,58 @@
+<%= form_for @product, remote:true, :authenticity_token => true do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+	<!-- <lable for="product_category_id">Category</label><br> !-->
+<%= select("product","category_id",Category.find(:all).collect {|c| [c.name,c.id] } ,{:include_blank => '----- Select Category -------' }) %></p>
+  </div>
+
+
+
+<div class="control-group">
+      <%= f.label :product_name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :product_name, :class => 'input-xlarge' %>
+      </div>
+    </div>
+
+<div class="control-group">
+      <%= f.label :description, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :description, :class => 'input-xlarge' %>
+      </div>
+    </div>
+
+
+   <div class="control-group">
+        <%= f.label :image, :class => 'control-label' %>
+        <div class="controls">
+            <%= f.file_field :image_one, :class => 'input-xlarge' %>
+        </div>
+    </div>
+    <% if @product.image_one? %>
+        <div class="control-group"><div class="controls"><%= image_tag @product.image_one_url(:logo) , :size => "260x180"  %></div></div>
+    <% end %>
+
+<div class="control-group">
+      <%= f.label :price, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :price, :class => 'input-xlarge' %>
+      </div>
+    </div>
+
+<%= link_to 'Back', categories_path %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

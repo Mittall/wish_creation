@@ -1,0 +1,37 @@
+<html>
+<h4 style="color:#336699;text-align:left"> Comments </h4>
+<hr>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Event product</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.get_user_name(comment.user_id) %></td>
+        <td><%= comment.event_product_id %></td>
+        <td><%= comment.description %></td>
+	<td><%= image_tag comment.get_user_image(comment.user_id), :size => "50x50" %></td>
+        <!--<td><%= comment.image %></td>
+	<td><%= image_tag comment.image_url(:logo) %>-->
+        <td><%= link_to 'Show', comment %></td>
+        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
+        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<!--<%= link_to 'New Comment', new_comment_path %>!-->
